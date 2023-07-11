@@ -1,0 +1,221 @@
+n_train=[30, 30, 30]
+
+
+f
+
+
+Experiment 1:
+PSTL template: {p_formula}
+
+
+STL formula for class 1: (( pi[2] > 22.4375 )until[4 : 60 ]( pi[1] <= 22.5 ))
+STL formula for class 2: (( pi[2] > 22.4375 )until[4 : 15 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 29.6875 )until[19 : 38 ]( pi[1] <= 71.25 ))
+
+
+MSC1_train: 0.011111111111111112
+MSC2_train: 0.0
+MSC3_train: 0.011111111111111112
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 0.967741935483871
+
+recall1_train: 0.9666666666666667
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.008376963350785341
+MSC2_test: 0.0036649214659685864
+MSC3_test: 0.005759162303664921
+
+precision1_test: 1.0
+precision2_test: 0.9873684210526316
+precision3_test: 0.9771309771309772
+
+recall1_test: 0.9835051546391752
+recall2_test: 0.997872340425532
+recall3_test: 1.0
+
+time_learning_1 = 5956.234440803528
+data_seed_1 = 911619
+learning_seed_1 = 797533
+
+
+Experiment 2:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 22.4375 )until[15 : 60 ]( pi[1] <= 37.125 ))
+STL formula for class 2: (( pi[2] > 20.625 )until[4 : 15 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 29.6875 )until[22 : 41 ]( pi[1] <= 76.125 ))
+
+
+MSC1_train: 0.0
+MSC2_train: 0.0
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 1.0
+
+recall1_train: 1.0
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.0005235602094240838
+MSC2_test: 0.0005235602094240838
+MSC3_test: 0.0010471204188481676
+
+precision1_test: 0.9989701338825953
+precision2_test: 1.0
+precision3_test: 0.997872340425532
+
+recall1_test: 1.0
+recall2_test: 0.997872340425532
+recall3_test: 0.997872340425532
+
+time_learning_2 = 6077.9917776584625
+data_seed_2 = 15520
+learning_seed_2 = 717847f
+
+
+Experiment 3:
+PSTL template: {p_formula}
+
+
+STL formula for class 1: (( pi[2] > 22.4375 )until[41 : 60 ]( pi[1] <= 27.375 ))
+STL formula for class 2: (( pi[2] > 22.4375 )until[0 : 11 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 31.5 )until[19 : 52 ]( pi[1] <= 71.25 ))
+
+
+MSC1_train: 0.0
+MSC2_train: 0.0
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 1.0
+
+recall1_train: 1.0
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.004712041884816754
+MSC2_test: 0.002617801047120419
+MSC3_test: 0.0031413612565445027
+
+precision1_test: 0.9958720330237358
+precision2_test: 1.0
+precision3_test: 0.9873949579831933
+
+recall1_test: 0.9948453608247423
+recall2_test: 0.9893617021276596
+recall3_test: 1.0
+
+time_learning_3 = 6193.917502164841
+data_seed_3 = 153523
+learning_seed_3 = 784220
+
+
+Experiment 4:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 24.25 )until[22 : 41 ]( pi[1] <= 37.125 ))
+STL formula for class 2: (( pi[2] > 20.625 )until[8 : 15 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 31.5 )until[19 : 22 ]( pi[1] <= 81.0 ))
+
+
+MSC1_train: 0.0
+MSC2_train: 0.0
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 1.0
+
+recall1_train: 1.0
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.0031413612565445027
+MSC2_test: 0.0005235602094240838
+MSC3_test: 0.0036649214659685864
+
+precision1_test: 0.9979338842975206
+precision2_test: 1.0
+precision3_test: 0.9894291754756871
+
+recall1_test: 0.9958762886597938
+recall2_test: 0.997872340425532
+recall3_test: 0.9957446808510638
+
+time_learning_4 = 6082.0625212192535
+data_seed_4 = 509722
+learning_seed_4 = 85887
+
+
+Experiment 5:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 22.4375 )until[4 : 60 ]( pi[1] <= 17.625 ))
+STL formula for class 2: (( pi[2] > 22.4375 )until[4 : 15 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 27.875 )until[30 : 56 ]( pi[1] <= 61.5 ))
+
+
+MSC1_train: 0.011111111111111112
+MSC2_train: 0.011111111111111112
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 0.967741935483871
+precision3_train: 1.0
+
+recall1_train: 0.9666666666666667
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.024607329842931937
+MSC2_test: 0.0062827225130890054
+MSC3_test: 0.01832460732984293
+
+precision1_test: 0.9989189189189189
+precision2_test: 0.9770833333333333
+precision3_test: 0.9306930693069307
+
+recall1_test: 0.9525773195876288
+recall2_test: 0.997872340425532
+recall3_test: 1.0
+
+time_learning_5 = 6568.525742292404
+data_seed_5 = 755198
+learning_seed_5 = 227723
+
+
+
+Average 
+
+
+MSC1_train = 0.0044 +- 0.005
+MSC2_train = 0.002199 +- 0.00439
+MSC3_train = 0.00222 +- 0.0044
+
+
+MSC1_test = 0.0082691 +- 0.008551
+MSC2_test = 0.00269 +- 0.00212
+MSC3_test = 0.006 +- 0.006
+
+
+Time(hours)  = 1.715333 +- 0.058

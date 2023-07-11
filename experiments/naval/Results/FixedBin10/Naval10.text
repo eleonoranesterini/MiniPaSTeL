@@ -1,0 +1,224 @@
+n_train=[10, 10, 10]
+
+
+
+
+
+Experiment 1:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 24.25 )until[34 : 60 ]( pi[1] <= 22.5 ))
+STL formula for class 2: (( pi[2] > 18.8125 )until[8 : 11 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 29.6875 )until[19 : 22 ]( pi[1] <= 71.25 ))
+
+
+MSC1_train: 0.03333333333333333
+MSC2_train: 0.0
+MSC3_train: 0.03333333333333333
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 0.9090909090909091
+
+recall1_train: 0.9
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.04619289340101523
+MSC2_test: 0.0010152284263959391
+MSC3_test: 0.04619289340101523
+
+precision1_test: 0.9988901220865705
+precision2_test: 1.0
+precision3_test: 0.8433734939759037
+
+recall1_test: 0.9090909090909091
+recall2_test: 0.9959183673469387
+recall3_test: 1.0
+
+time_learning_1 = 2808.2892611026764
+data_seed_1 = 542215
+learning_seed_1 = 589255
+
+
+Experiment 2:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 24.25 )until[22 : 41 ]( pi[1] <= 27.375 ))
+STL formula for class 2: (( pi[2] > 17 )until[4 : 11 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 29.6875 )until[19 : 38 ]( pi[1] <= 81.0 ))
+
+
+MSC1_train: 0.0
+MSC2_train: 0.0
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 1.0
+
+recall1_train: 1.0
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.02081218274111675
+MSC2_test: 0.0010152284263959391
+MSC3_test: 0.02081218274111675
+
+precision1_test: 0.9989484752891693
+precision2_test: 1.0
+precision3_test: 0.9227871939736346
+
+recall1_test: 0.9595959595959596
+recall2_test: 0.9959183673469387
+recall3_test: 1.0
+
+time_learning_2 = 2721.1465272903442
+data_seed_2 = 158404
+learning_seed_2 = 311305
+
+
+Experiment 3:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 26.0625 )until[19 : 22 ]( pi[1] <= 46.875 ))
+STL formula for class 2: (( pi[2] > 24.25 )until[0 : 11 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 26.0625 )until[34 : 41 ]( pi[1] <= 71.25 ))
+
+
+MSC1_train: 0.0
+MSC2_train: 0.0
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 1.0
+
+recall1_train: 1.0
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.08375634517766498
+MSC2_test: 0.0005076142131979696
+MSC3_test: 0.083248730964467
+
+precision1_test: 0.9847238542890717
+precision2_test: 1.0
+precision3_test: 0.7587301587301587
+
+recall1_test: 0.8464646464646465
+recall2_test: 0.9979591836734694
+recall3_test: 0.9755102040816327
+
+time_learning_3 = 2927.3042962551117
+data_seed_3 = 178119
+learning_seed_3 = 745099
+
+
+Experiment 4:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 24.25 )until[38 : 41 ]( pi[1] <= 27.375 ))
+STL formula for class 2: (( pi[2] > 20.625 )until[0 : 15 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 29.6875 )until[22 : 56 ]( pi[1] <= 71.25 ))
+
+
+MSC1_train: 0.03333333333333333
+MSC2_train: 0.0
+MSC3_train: 0.03333333333333333
+
+precision1_train: 1.0
+precision2_train: 1.0
+precision3_train: 0.9090909090909091
+
+recall1_train: 0.9
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.04619289340101523
+MSC2_test: 0.008121827411167513
+MSC3_test: 0.03908629441624366
+
+precision1_test: 1.0
+precision2_test: 0.9702380952380952
+precision3_test: 0.8641975308641975
+
+recall1_test: 0.908080808080808
+recall2_test: 0.9979591836734694
+recall3_test: 1.0
+
+time_learning_4 = 2762.485122680664
+data_seed_4 = 847208
+learning_seed_4 = 241336
+
+
+Experiment 5:
+PSTL template: (( pi[2] > epsilon0- )until[epsilon1- : epsilon2- ]( pi[1] <= epsilon3- ))
+
+
+STL formula for class 1: (( pi[2] > 24.25 )until[41 : 52 ]( pi[1] <= 32.25 ))
+STL formula for class 2: (( pi[2] > 17 )until[11 : 15 ]( pi[1] <= 42.0 ))
+STL formula for class 3: (( pi[2] > 31.5 )until[19 : 56 ]( pi[1] <= 56.625 ))
+
+
+MSC1_train: 0.03333333333333333
+MSC2_train: 0.03333333333333333
+MSC3_train: 0.0
+
+precision1_train: 1.0
+precision2_train: 0.9090909090909091
+precision3_train: 1.0
+
+recall1_train: 0.9
+recall2_train: 1.0
+recall3_train: 1.0
+
+
+
+MSC1_test: 0.027411167512690356
+MSC2_test: 0.008629441624365483
+MSC3_test: 0.01979695431472081
+
+precision1_test: 1.0
+precision2_test: 0.9683168316831683
+precision3_test: 0.9262759924385633
+
+recall1_test: 0.9454545454545454
+recall2_test: 0.9979591836734694
+recall3_test: 1.0
+
+time_learning_5 = 2882.7203924655914
+data_seed_5 = 830454
+learning_seed_5 = 2136
+
+
+
+
+Average:
+
+MSC1_train: 0.098 +- 0.016
+MSC2_train: 0.0066 +- 0.0132
+MSC3_train: 0.013266 +- 0.016
+
+
+
+MSC1_test: 0.0448 +- 0.0219
+MSC2_test: 0.0038 +- 0.00368
+MSC3_test: 0.04181 +- 0.023089606
+
+
+
+time = 0.783 +- 0.021
+

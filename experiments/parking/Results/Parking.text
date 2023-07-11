@@ -1,0 +1,48 @@
+n_train= 80 perc
+
+
+
+
+
+Experiment 1: scenario day+adult_clear vs night+child_clear
+
+ PSTL template1: (always( pi[2] <= - epsilon1- + pi[9]  )) or (eventually( pi[3] >= epsilon0- ))
+ PSTL template2: ((always( pi[3] <= epsilon0- )) or  ( pi[8] >= epsilon1- ))
+
+STL formula for class 1: (always( pi[2] <= - 1.1875 + pi[9]  )) or (eventually( pi[3] >= 9.878125000000002 ))
+STL formula for class 2: ((always( pi[3] <= 9.531875000000001 )) or  ( pi[8] >= 1.3125 ))
+
+
+MSC_train: 0.046875
+precision_train: 0.9503105590062112
+recall_train: 0.95625
+
+
+MSC_test: 0.0375
+precision_test: 1.0
+recall_test: 0.925
+time_learning_1 = 372.57065773010254
+data_seed_1 = 885736
+learning_seed_1 = 839131
+
+
+Experiment 2: scenario day+adult+clear vs night+child+fog
+
+ PSTL template1: (always( pi[2] <= - epsilon1- + pi[9]  )) or (eventually( pi[3] >= epsilon0- ))
+ PSTL template2: ((always( pi[3] <= epsilon0- )) or  ( pi[8] >= epsilon1- ))
+
+STL formula for class 1: (always( pi[2] <= - 1 + pi[9]  )) or (eventually( pi[3] >= 9.878125000000002 ))
+STL formula for class 2: ((always( pi[3] <= 8.839374999999999 )) or  ( pi[8] >= 0 ))
+
+
+MSC_train: 0.16875
+precision_train: 0.7548076923076923
+recall_train: 0.98125
+
+
+MSC_test: 0.15
+precision_test: 0.7916666666666666
+recall_test: 0.95
+time_learning_2 = 372.8640019893646
+data_seed_2 = 350353
+learning_seed_2 = 833453

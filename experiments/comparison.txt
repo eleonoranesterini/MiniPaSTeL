@@ -1,0 +1,245 @@
+NAVAL CASE STUDY 150 - 1850
+
+
+
+TOOL : DECISION TREE
+
+seed 8868 : (G_{[233,269]}x_{1}<33.1 \wedge F_{[68,185]}x_{1}>39.8). 
+Time =  1.7966, MSC_train = 0, MSC_test = 0.0070
+
+
+seed 470380 : (G_{[239,265]}x_{1}<33.2 \wedge F_{[73,177]}x_{1}>40.7)) 
+Time = 0.4334, MSC_train = 0 , MSC_test = 0.0086
+
+
+
+seed 505971:  (G_{[231,270]}x_{1}<34 \wedge F_{[67.6,76.4]}x_{1}>39.2) 
+Time = 0.4203 , MSC_train = 0 , MSC_test = 0.0162
+
+
+
+seed 924934 : (G_{[212,272]}x_{1}<30.8 \wedge F_{[63.6,126]}x_{1}>41.4) 
+Time = 0.2776 , MSC_train = 0 , MSC_test = 0.0070
+
+
+
+seed 16038: (G_{[235,266]}x_{1}<34 \wedge F_{[66.4,170]}x_{1}>40.7)
+Time =0.3751 , MSC_train = 0 , MSC_test = 0.0038
+
+
+AVERAGE +- STD
+Time = 0.6606 +- 0.57062 (seconds)
+MSC_train = 0.0 +- 0.0
+MSC_test = 0.00852+-  0.0041
+
+
+
+TOOL : ROGE - GENETIC
+
+
+- seed 8868: ((x >=  51.6473) U[2.34770, 251.822] (y <= 29.6183))
+Time = 165.378 , MSC_train =  0.386, MSC_test = 0.494
+
+
+
+seed 470380: F[54.0504, 298.96] ((y >= 36.229 & x <= 48.838))
+Time = 153.519  , MSC_train =  0.4466, MSC_test =0.5362
+
+
+
+seed 505971:  ((y >= 29.1515) U[155.22, 285.63] (x >= 6.7123))
+Time = 153.995, MSC_train = 0.5, MSC_test = 0.544
+
+
+seed 924934: G[135.156, 210.82] ((y <= 26.649 | y >= 29.1717)) 
+Time = 155.293 ,  MSC_train = 0.3333 , MSC_test = 0.3664
+
+
+
+seed 16038: F[83.37, 170.2269] ((y <= 24.7581 | x >= 81.3303))
+
+Time = 158.313 , MSC_train = 0.64, MSC_test =0.6827
+
+AVERAGE +- STD
+Time = 157.299 +- 4.3709 (seconds)
+MSC_train =  0.46118 +- 0.1055
+MSC_test = 0.5246 +- 0.101
+
+
+
+TOOL : ENUMERATIVE APPROACH
+
+seed 8868: 
+
+    Class1 : (y[t] > 19.92) until_[0,50] (x[t] < 26.65)
+
+	Time = 1785.74 , MSC_train = 0 , MSC_test = 0.0016
+
+ Class2 :  ev_[0,11] (y[t] < 29.02)
+
+	Time = 90.37 , MSC_train = 0.006666, MSC_test = 0.02
+
+     Class3 :  alw_[0,18] (y[t] >  31.67)
+
+	Time = 42.12,  MSC_train = 0.06, MSC_test = 0.133
+
+Total Time : 1918.23
+
+
+seed 470380: 
+
+    Class1 :  (y[t] > 19.842) until_[0,49.570] (x[t] < 25.68)
+
+	Time = 1865.43, MSC_train = 0.0066, MSC_test = 0.0027
+
+ Class2 : ev_[0,11.082] (y[t] <  28.209)
+
+	Time =   95.6400, MSC_train = 0.0266666, MSC_test = 0.0081
+
+     Class3 :  alw_[0,18] (y[t] > 31.687)
+
+	Time =  41.520, MSC_train = 0.08, MSC_test = 0.13135
+
+Total Time : 2002.59
+
+
+seed 505971: 
+
+    Class1 : (y[t] > 19.673) until_[0,49] (x[t] < 24.339)
+
+	Time = 1850.49, MSC_train = 0.0, MSC_test =0.0075
+
+ Class2  ev_[0,11.189] (y[t] < 28.448)
+
+	Time = 91.360, MSC_train = 0.013333, MSC_test = 0.01135
+
+     Class3 :    alw_[0,60] (x[t] > 35.18)
+
+	Time =  66.63, MSC_train =0.0, MSC_test = 0.0
+
+Total Time :  2008.48
+
+
+seed 924934
+
+    Class1 :  (y[t] > 19.673) until_[0,49] (x[t] < 24.339)
+
+	Time = 1773.92, MSC_train =  0.006667, MSC_test = 0.00702
+
+ 
+Class2 :  ev_[0,11] (y[t] < 29.023)
+
+	Time =81.79, MSC_train = 0.006667, MSC_test = 0.02
+
+     Class3 :  alw_[0,17.362] (y[t] > 31.380)
+
+	Time = 39.31 , MSC_train =  0.080 , MSC_test = 0.17297
+
+Total Time : 1895.02
+
+
+seed 16038
+
+    Class1 : (y[t] > 19.42) until_[0,49] (x[t] < 23.89)
+
+	Time = 1705.25, MSC_train = 0.033, MSC_test = 0.02972
+
+ Class2 :   ev_[0,11.01] (y[t] < 28.0891)
+
+	Time = 85.37, MSC_train = 0.0 , MSC_test = 0.00918
+
+     Class3 :  alw_[0,60] (x[t] > 35.718)
+
+	Time = 74.400, MSC_train = 0.006666, MSC_test = 0.0043
+
+Total Time :1865.02
+
+AVERAGE +- STD:
+
+MSC_train 1 = 0.0092 +- 0.012
+MSC_test 1 = 0.0097 +- 0.010
+Time 1 = 1796.16+- 57.650505
+
+MSC_train 2 = 0.0106 +- 0.0090
+MSC_test 2 = 0.01372 +- 0.0052 
+Time 2 = 88.906 +- 4.83017
+
+MSC_train 3 =  0.0453 +- 0.03512
+MSC_test 3 = 0.08832 +- 0.07193
+Time 3 = 52.79 +- 14.7044
+
+Time total =  1937.86+- 57.7986
+
+
+
+
+PARKING CASE STUDY
+
+TOOL : DECISION TREE (x_1 = v, x_2 = d)
+
+- seed 88573. Adult + day (clear) vs Child + night (clear)
+
+G_[7.2,7.96]( x_2 < 0.731) or ( F_[7.2,7.96](x_2 >0.73) and (G_[4.48, 10.6]( x_1 < -7.49)) )
+
+Time = 4.058
+msc_test  = 0.1375
+
+- seed 350353.  Adult + day  + clear vs Child + night + clear 
+
+G_[7.21,11.6]( x_2 < 0.254 ) or (F_[7.2,11.6](x_2>0.254) and (G_[5.87,8.24](x_2 < 7.21) and G_[9.73, 10.5] (x_1 < -7.71)))
+
+Time = 3.45
+msc_test  = 0.1125
+
+
+
+
+TOOL : ROGE - GENETIC
+
+seed 88573. Adult + day (clear) vs Child + night (clear)
+
+4 variables : ego_y, ego_v_y, ego_a_y, dist_crash
+
+((y <= 0.0) U[0.0615, 1.812] (a_y <= 14.09))
+
+Time = 1101.215
+MSC_train = 0.5 (always satisfied)
+MSC_test = 0.5 (always satisfied)
+
+2 variables : ego_y, ego_v_y
+
+F[11.134, 11.249] ((y >= 0.0 & v_y >= 0.2396))
+
+Time = 254.202
+MSC_train = 0.5 (always violated)
+MSC_test = 0.5 (always violated)
+
+seed 350353.  Adult + day  + clear vs Child + night + clear 
+
+4 variables : ego_y, ego_v_y, ego_a_y, dist_crash
+
+((a_y >=0.1690) U[4.99,5.741] (y >= 0.0))
+
+Time = 1006.980
+MSC_train = 0.5 (always violated)
+MSC_test = 0.5(always violated)
+
+2 variables : ego_y, ego_v_y,
+
+((v_y >= T10.148) U[4.477, 7.704] (y >= 0.0))
+
+Time =228.023
+MSC_train = 0.5 (always violated)
+MSC_test = 0.5 (always violated)
+
+
+TOOL : ENUMERATIVE APPROACH
+
+seed 88573. Adult + day (clear) vs Child + night (clear)
+2 variables.
+	Failure after 5777
+- seed 350353.
+
+
+	
+

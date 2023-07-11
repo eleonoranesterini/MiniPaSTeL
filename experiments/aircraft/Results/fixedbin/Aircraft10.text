@@ -1,0 +1,39 @@
+n_train=[10,10]
+
+
+
+
+
+Experiment 1:
+
+ PSTL template:  always( ( pi[1] >= epsilon1- ) implies (always[0 : epsilon0- ] ( abs( pi[1] - epsilon1- ) < 0.5  )))
+
+STL formula for class 1:  always( ( pi[1] >= 1.0000000000000002 ) implies (always[0 : 438 ] ( abs( pi[1] - 1.0000000000000002 ) < 0.5  )))
+STL formula for class 2:  always( ( pi[1] >= 1.6000000000000008 ) implies (always[0 : 719 ] ( abs( pi[1] - 1.6000000000000008 ) < 0.5  )))
+
+
+MSC_train: 0.5
+precision_train: inf
+recall_train: 0.0
+time_learning_1 = 2814.3630974292755
+data_seed_1 = 269911
+learning_seed_1 = 827409
+
+
+Experiment 2 :
+
+ PSTL template:  always( ( pi[1] >= pi[2] ) implies (always[0: epsilon0-](  abs( pi[1] - pi[2] ) < 0.5 )   and (always[epsilon1- : epsilon0- + epsilon1- ](  abs(pi[1] - pi[2] ) > 0.5))))
+
+
+
+STL formula for class 1:  always( ( pi[1] >= pi[2] ) implies (always[0: 453](  abs( pi[1] - pi[2] ) < 0.5 )   and (always[508 : 453 + 508 ](  abs(pi[1] - pi[2] ) > 0.5))))
+STL formula for class 2:  always( ( pi[1] >= pi[2] ) implies (always[0: 23](  abs( pi[1] - pi[2] ) < 0.5 )   and (always[47 : 23 + 47 ](  abs(pi[1] - pi[2] ) > 0.5))))
+
+
+MSC_train: 0.0
+precision_train: 1.0
+recall_train: 1.0
+
+
+time_learning_2 = 64551.0680308342
+learning_seed_2 = 850917
