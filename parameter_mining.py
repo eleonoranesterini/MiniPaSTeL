@@ -109,15 +109,22 @@ def main(inputs):
             print('V3 done')
         
     elif bool_binarysearch and not bool_quantitative: #Binary satisfaction with binary search
-        if bool_mono: V1 = fun_BS.BinarySearchMonotonic(time_series_class1_train,  gran, par_bounds,fun.Approx_Val(1, [ ]) , mono,  p_formula, sampling_freq, constant_definition)
+        if bool_mono: 
+            V1, counter = fun_BS.BinarySearchMonotonic(time_series_class1_train,  gran, par_bounds,fun.Approx_Val(1, [ ]) ,[], mono,  p_formula, sampling_freq, constant_definition, 0)
+            print('V1 counter = ', counter)
         else: V1 = fun_BS.BinarySearch(time_series_class1_train,  gran , par_bounds,  fun.Approx_Val(1, [ ]), [],p_formula, sampling_freq, constant_definition)
         print('V1 done')
-        if bool_mono: V2 = fun_BS.BinarySearchMonotonic(time_series_class2_train,  gran, par_bounds,fun.Approx_Val(2, [ ]) , mono,  p_formula, sampling_freq, constant_definition)
+        
+        if bool_mono: 
+            V2, counter = fun_BS.BinarySearchMonotonic(time_series_class2_train,  gran, par_bounds,fun.Approx_Val(2, [ ]) ,[], mono,  p_formula, sampling_freq, constant_definition, 0)
+            print('V2 counter = ', counter)
         else: V2 = fun_BS.BinarySearch(time_series_class2_train,  gran , par_bounds,  fun.Approx_Val(2, [ ]), [] ,p_formula, sampling_freq, constant_definition)
         print('V2 done')
         
         if len(traces)>2 :
-            if bool_mono: V3 = fun_BS.BinarySearchMonotonic(time_series_class3_train,  gran, par_bounds, fun.Approx_Val(3, [ ]) , mono,  p_formula, sampling_freq, constant_definition)
+            if bool_mono: 
+                V3, counter = fun_BS.BinarySearchMonotonic(time_series_class3_train,  gran, par_bounds, fun.Approx_Val(3, [ ]) ,[], mono,  p_formula, sampling_freq, constant_definition, 0)
+                print('V3 counter = ', counter)
             else:V3 = fun_BS.BinarySearch(time_series_class3_train,  gran , par_bounds,  fun.Approx_Val(3, [ ]), [] ,p_formula, sampling_freq, constant_definition)
             print('V3 done')
         

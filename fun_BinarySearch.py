@@ -186,7 +186,7 @@ def BinarySearch(time_series,  gran_min, par_bound, V , eval_par, p_formula, sam
     return V
 
 
-def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formula, sampling_freq, constant_definition):
+def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,  p_formula, sampling_freq, constant_definition, counter):
     
     '''The function approximates the validity domain of the given times series with BinarySearch
     in case the parameteric specification is monotonic with respect to all its parameters.
@@ -206,7 +206,8 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formul
     ## PROCEDURE FOR ONE CELL
     nb_parameters = len(par_bound)
     
-    number_sampled = 99
+    number_sampled = 100 - len(eval_par) # number of parameters valuation to be evaluated in each cell
+    
     
     # Parameters minimal and maximal of each parameter dimension. 
     # They define the bounds of the cell in each dimension
@@ -216,9 +217,15 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formul
     #The two quantities depend on the monotonicity sign
     parameters_min_mon = [ ] #minimal point in the monotonicity sense: 
     # if it is satisfied, than the whole cell is satisfied (p if increasing, p+1 if decreasing)
+    min_already_evaluated = False
     
     parameters_max_mon = [] #maximal point in the monotonicity sense: 
     # if it is not satisfied, than the whole cell is unsatisfied (p+1 if increasing, p if decreasing)
+    max_already_evaluated = False
+    
+    new_possible_eval_par = []
+    
+    
     
     ##Construction of the two quantities
     for par in range(nb_parameters):
@@ -234,47 +241,88 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formul
     parameters_max_mon = fun.round_timing_parameters(parameters_max_mon, sampling_freq, p_formula)
     parameters_min_mon = fun.round_timing_parameters(parameters_min_mon, sampling_freq, p_formula)
    
-    evaluation = 'start'  
-    for i , x in enumerate(time_series):
-        formula = sr.instantiate_formula(p_formula, parameters_max_mon)
-        rob_max = sr.EvaluateRob(x, formula, sampling_freq, constant_definition)
+    ## Check whether HIGHEST and/or LOWEST points have already been evaluated:
+       
+    for index , el in enumerate(eval_par):
         
-        # If ONE time-series does NOT satisfy parameters_max_mon then the whole cell is not satisfied
-        if rob_max == 'undef' or rob_max < 0.: 
-                evaluation = 'unsat'
-                break
+        if el[:-1] == parameters_max_mon: max_already_evaluated = el[-1]
+        
+        elif el[: -1 ] == parameters_min_mon: min_already_evaluated = el[-1]
+        
+        #Both have been
+        if max_already_evaluated != False and min_already_evaluated != False : break
+   
+    
+    evaluation = 'start' 
+    
+    if max_already_evaluated == False:
+    
+        new_possible_eval_par.append(parameters_max_mon)
+        formula = sr.instantiate_formula(p_formula, parameters_max_mon)
+        
+        ## Evaluation of the HIGHEST point : if violated ->  all cell is violated
+        counter += 1
+        for i , x in enumerate(time_series):
+            
+            rob_max = sr.EvaluateRob(x, formula, sampling_freq, constant_definition)
+            
+            # If ONE time-series does NOT satisfy parameters_max_mon then the whole cell is not satisfied
+            if rob_max == 'undef' or rob_max < 0.: 
+                    evaluation = 'unsat'
+                    new_possible_eval_par[-1].append(-1)
+                    break
+                
+    elif  max_already_evaluated < 0.: evaluation = 'unsat'
+      
     
     if evaluation != 'unsat':
-        for i , x in enumerate(time_series):
-            formula = sr.instantiate_formula(p_formula, parameters_min_mon)
-            rob_min = sr.EvaluateRob(x,formula, sampling_freq, constant_definition)
-            
-            if rob_min == 'undef' or (rob_min!= 'undef' and rob_min < 0.):
-                evaluation = 'unknown'
-                break
-                # If ALL time series satisfy parameters_min_mon then the whole cell is satisfied 
-            if (i == len(time_series)-1) and (evaluation != 'unknown') : evaluation = 'sat'
         
-    min_length = 0
-    if evaluation == 'sat'  and len(V.tensor)>= min_length: 
+        if max_already_evaluated == False: new_possible_eval_par[-1].append(1) #the parameters_max_mon is satisfied
+        
+        if min_already_evaluated == False:
+        
+            new_possible_eval_par.append(parameters_min_mon)
+            
+            ## Evaluation of the LOWEST point : if satisfied ->  all cell is satisfied
+            formula = sr.instantiate_formula(p_formula, parameters_min_mon)
+            
+            counter += 1
+            for i , x in enumerate(time_series):
+                rob_min = sr.EvaluateRob(x,formula, sampling_freq, constant_definition)
+                
+                if rob_min == 'undef' or (rob_min!= 'undef' and rob_min < 0.):
+                    evaluation = 'unknown'
+                    new_possible_eval_par[-1].append(-1)
+                    break
+                    # If ALL time series satisfy parameters_min_mon then the whole cell is satisfied 
+                if (i == len(time_series)-1) and (evaluation != 'unknown') : 
+                    evaluation = 'sat'
+                    new_possible_eval_par[-1].append(1)
+                    
+        elif min_already_evaluated < 0.: evaluation = 'unknown'
+        elif min_already_evaluated > 0. : evaluation = 'sat'
+    
+        
+    # min_length = 0
+    if evaluation == 'sat': #  and len(V.tensor)>= min_length: 
         s = 1 
         #Append the parameters defining the cell and its satisfaction value
         parameters_max.append(s)
         parameters_min.extend(parameters_max)
         V.tensor.append(parameters_min)
         #print('sat')
-        return V
+        return V, counter
         
-    elif evaluation == 'unsat'  and len(V.tensor)>= min_length:
+    elif evaluation == 'unsat': #  and len(V.tensor)>= min_length:
         s = -1 
         #Append the parameters defining the cell and its satisfaction value
         parameters_max.append(s)
         parameters_min.extend(parameters_max)
         V.tensor.append(parameters_min)
         #print('unsat')
-        return V
+        return V, counter
         
-    elif evaluation == 'unknown' or len(V.tensor)< min_length: 
+    elif evaluation == 'unknown': # or len(V.tensor)< min_length: 
         
         diff = np.array(parameters_max) - np.array(parameters_min) 
         
@@ -285,40 +333,59 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formul
             random_par = np.random.uniform(low=parameters_min, high=parameters_max, size=(number_sampled,nb_parameters))
             rho = [] #List that will be long random_par and that represents the satisfaction 
             
-            #Loop of parameters valuation samples in a single cell
-            for i in range(number_sampled): 
-                parameters_valuation = random_par[i]
-                parameters_valuation = fun.round_timing_parameters(parameters_valuation, sampling_freq, p_formula)
-    
-                #Loop to evaluate the satisfaction of a single parameter valuation
-                for j, x in enumerate(time_series):
-                    # Call tool rtamt to get robustness of trace x with respect to parameters paremeters_valuation
-                    formula = sr.instantiate_formula(p_formula, parameters_valuation)
-                    rob_single_time_series = sr.EvaluateRob(x, formula , sampling_freq, constant_definition)
-                    
-                    # If ONE time-series does NOT satisfy, than the parameter valuation is associated with 0
-                    if rob_single_time_series == 'undef' or rob_single_time_series < 0.: 
-                        rho.append(-1)
-                        break
-                    
-                    # If ALL time series satisfy, then the parameter valuation is associated with 1   
-                    if rob_single_time_series != 'undef' and rob_single_time_series >= 0. and j == len(time_series)-1: 
-                        rho.append(1)
+            bool_eval = True
+            
+            
+            # Adding the parameters valuations already computed
+            for _ , e in enumerate(eval_par):
+                new_possible_eval_par.append(e)
+                rho.append(e[-1])
                 
-                #Satisfaction of a cell: 
                 if rho[-1] > 0. :
                     s = 1 
+                    bool_eval = False
                     break
-                elif i == (number_sampled -1) and rho[-1] < 0.:
-                    s = -1
+                
+            
+            if bool_eval :
+                #Loop of parameters valuation samples in a single cell
+                for i in range(number_sampled): 
+                    parameters_valuation = random_par[i]
+                    parameters_valuation = fun.round_timing_parameters(parameters_valuation, sampling_freq, p_formula)
+        
+                    new_possible_eval_par.append(list(parameters_valuation))
+                    
+                    #Loop to evaluate the satisfaction of a single parameter valuation
+                    for j, x in enumerate(time_series):
+                        # Call tool rtamt to get robustness of trace x with respect to parameters paremeters_valuation
+                        formula = sr.instantiate_formula(p_formula, parameters_valuation)
+                        rob_single_time_series = sr.EvaluateRob(x, formula , sampling_freq, constant_definition)
+                        
+                        # If ONE time-series does NOT satisfy, than the parameter valuation is associated with 0
+                        if rob_single_time_series == 'undef' or rob_single_time_series < 0.: 
+                            rho.append(-1)
+                            new_possible_eval_par[-1].append(-1)
+                            break
+                        
+                        # If ALL time series satisfy, then the parameter valuation is associated with 1   
+                        if rob_single_time_series != 'undef' and rob_single_time_series >= 0. and j == len(time_series)-1: 
+                            rho.append(1)
+                            new_possible_eval_par[-1].append(1)
+                    
+                    #Satisfaction of a cell: if at least one satisfied parameter valuation has been found
+                    if rho[-1] > 0. :
+                        s = 1 
+                        break
+                    
+                    elif i == (number_sampled -1) and rho[-1] < 0.:
+                        s = -1
                
             parameters_max.append(s)
             parameters_min.extend(parameters_max)
             V.tensor.append(parameters_min)
         
-            return V
+            return V, counter
             
-        
         #Minimal granularity has not been reached, so the cell is split. 
         # RECURSIVE STEP
         else:
@@ -331,6 +398,7 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formul
             # Loop long 2^(#number of parameters):    
             for iprod_car in itertools.product(*q): # for every combination of parameters
                 new_par_bound = []
+                new_eval_par = []
                 
                 # Definition of new parameters bound
                 for i in range(nb_parameters): 
@@ -338,13 +406,26 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V , mono,  p_formul
                     if iprod_car[i]==0: coordinate = [par_bound[i][0], (par_bound[i][0]+par_bound[i][1])/2 ]
                     elif iprod_car[i]==1: coordinate = [ (par_bound[i][0]+par_bound[i][1])/2 , par_bound[i][1] ]
                     new_par_bound.append(coordinate) 
+                
+                # Definition of parameters valuations already computed that belong to the new cell
+                for i , npep in enumerate(new_possible_eval_par):
+                    
+                    for j in range(len(npep)-1):
+                        if npep[j]<new_par_bound[j][0] or npep[j] > new_par_bound[j][1]: break
+                        if j == len(npep)-2: new_eval_par.append(npep)
+                        
+                # Removing parameters valuation that have been used already in the current cell
+                for _ , nep in enumerate(new_eval_par):  new_possible_eval_par.remove(nep)
                         
                 # The changes in the inputs are --> parameters_bounds : it delimites the new cell
-                V = BinarySearchMonotonic(time_series,  gran_min, new_par_bound,  V , mono , p_formula, sampling_freq, constant_definition) 
+                #                               --> eval_par : parameters already eveluated        
+                
+                V, counter = BinarySearchMonotonic(time_series,  gran_min, new_par_bound,  V ,new_eval_par , mono , p_formula, sampling_freq, constant_definition, counter) 
     
     else: print('Error!')
             
-    return V
+    return V, counter
+
 
 
 def BinarySearchQuantitative(time_series,  gran_min, par_bound, V , eval_par, p_formula, sampling_freq, constant_definition):
