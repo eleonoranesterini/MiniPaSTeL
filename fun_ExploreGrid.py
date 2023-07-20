@@ -168,30 +168,20 @@ def ExploreGridMonotonic( time_series , label,  grid, mono , p_formula, sampling
                    or -1 if the monotonicity for that parameter is decreasing.
     
     OUTPUT: - V = approximation of the validity domain (belonging to class Appox_Val)
-           - W (if decomented) is used to compute a different overapproximation of the validity domain:
-               
+         
            Basically, a cell belongs to V if there exists at least one point 
            (that is the max in the monotonicity sense because for monotonicity reasons if one other point is satisfied, this is as well) 
            in the cell that is satisfied by ALL time series 
            (i.e., if the max point in the cell is not satisfied by at least one time series, the cell is not added to V)
            
-           Conversely, a cell belongs to W if there exists at least one point in the cell
-           which is satisfied by ONE time series 
-           (i.e., if the max point in the cell is not satisfied by all time series, the cell is not added to V)
-           
-           V is then a subset of W
-    
     '''
     
     binary_tensor = []
-    # binary_tensor2 = []
     
     nb_parameters = len(grid.tensor)
     
     parameters_step = [list(np.arange(len(grid.tensor[par]))) for par in range(nb_parameters)]
     
-    #number of valuations in each cell: r
-    #r = 10
     
     #Cartesian product of all combination of parameters
     #Describe each cell with a vector in [0,1]^nb_parameters 
@@ -221,43 +211,28 @@ def ExploreGridMonotonic( time_series , label,  grid, mono , p_formula, sampling
         parameters_max_mon = fun.round_timing_parameters(parameters_max_mon, sampling_freq, p_formula)
         
         boolean1 = False
-        # boolean2 = False
         
+        formula = sr.instantiate_formula(p_formula, parameters_max_mon)
         for i , x in enumerate(time_series):
             # Call tool rtamt to get robustness of trace x with respect to parameters paremeters_valuation
-            formula = sr.instantiate_formula(p_formula, parameters_max_mon)
             rob_max = sr.EvaluateRob(x,formula, sampling_freq, constant_definition)
             
             if rob_max == 'undef' or rob_max < 0.: 
                 s = -1 # if one time series do not satisfy --> the point is not part of the validity joint domain
                 boolean1 = True
-                # print(i ,max(x[3]), x[1],'dist_no_crash',  [(x[3][-2]**2)/(2*abs(x[4][-2]))], 'dist_crash',abs(x[2][-1]-x[-1][0] + 2.337 + 0.187),  parameters_max_mon)
                 break
             
-            # if rob_max != 'undef' and rob_max > 0.:
-            #     s2 = 1
-            #     boolean2 = True
-            
-            ##!!! 
-            # if boolean1 == True and boolean2 == True: break
         
             if (i == len(time_series)-1): 
                 if boolean1 == False: s = 1 #if ALL time series satisfy the point --> satisfaction of the whole cell
-                # if boolean2 == False: s2 = -1
+               
              
         #Append the parameters defining the cell and its satisfaction value
         parameters_max.append(s)
         parameters_min.extend(parameters_max)
         binary_tensor.append(parameters_min)
-        # binary_tensor generic element is: parameters min, parameters max, s
-        # if s==1: print(s)
-        ###!!!
-        # new_parameters_min = parameters_min.copy()
-        # new_parameters_min[-1] = s2
-        # binary_tensor2.append(new_parameters_min)
-        
-        
+       
     V = fun.Approx_Val( label, binary_tensor) 
-    # W = fun.Approx_Val( label, binary_tensor2)        
-    return V#, W
+    
+    return V
 

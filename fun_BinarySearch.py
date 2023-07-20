@@ -186,7 +186,7 @@ def BinarySearch(time_series,  gran_min, par_bound, V , eval_par, p_formula, sam
     return V
 
 
-def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,  p_formula, sampling_freq, constant_definition, counter):
+def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,  p_formula, sampling_freq, constant_definition):
     
     '''The function approximates the validity domain of the given times series with BinarySearch
     in case the parameteric specification is monotonic with respect to all its parameters.
@@ -261,7 +261,7 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,
         formula = sr.instantiate_formula(p_formula, parameters_max_mon)
         
         ## Evaluation of the HIGHEST point : if violated ->  all cell is violated
-        counter += 1
+   
         for i , x in enumerate(time_series):
             
             rob_max = sr.EvaluateRob(x, formula, sampling_freq, constant_definition)
@@ -286,7 +286,7 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,
             ## Evaluation of the LOWEST point : if satisfied ->  all cell is satisfied
             formula = sr.instantiate_formula(p_formula, parameters_min_mon)
             
-            counter += 1
+     
             for i , x in enumerate(time_series):
                 rob_min = sr.EvaluateRob(x,formula, sampling_freq, constant_definition)
                 
@@ -311,7 +311,7 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,
         parameters_min.extend(parameters_max)
         V.tensor.append(parameters_min)
         #print('sat')
-        return V, counter
+        return V
         
     elif evaluation == 'unsat': #  and len(V.tensor)>= min_length:
         s = -1 
@@ -320,7 +320,7 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,
         parameters_min.extend(parameters_max)
         V.tensor.append(parameters_min)
         #print('unsat')
-        return V, counter
+        return V
         
     elif evaluation == 'unknown': # or len(V.tensor)< min_length: 
         
@@ -384,7 +384,7 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,
             parameters_min.extend(parameters_max)
             V.tensor.append(parameters_min)
         
-            return V, counter
+            return V
             
         #Minimal granularity has not been reached, so the cell is split. 
         # RECURSIVE STEP
@@ -420,11 +420,11 @@ def BinarySearchMonotonic(time_series,  gran_min, par_bound, V ,eval_par,  mono,
                 # The changes in the inputs are --> parameters_bounds : it delimites the new cell
                 #                               --> eval_par : parameters already eveluated        
                 
-                V, counter = BinarySearchMonotonic(time_series,  gran_min, new_par_bound,  V ,new_eval_par , mono , p_formula, sampling_freq, constant_definition, counter) 
+                V = BinarySearchMonotonic(time_series,  gran_min, new_par_bound,  V ,new_eval_par , mono , p_formula, sampling_freq, constant_definition) 
     
     else: print('Error!')
             
-    return V, counter
+    return V
 
 
 
